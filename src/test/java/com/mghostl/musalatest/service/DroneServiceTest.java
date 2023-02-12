@@ -62,7 +62,7 @@ public class DroneServiceTest implements MockTest {
         Drone drone = createDrone();
 
         when(droneMapper.map(droneDTO)).thenReturn(drone);
-        when(droneRepository.existsById(drone.getSerialNumber())).thenReturn(true);
+        when(droneRepository.existsById(droneDTO.getSerialNumber())).thenReturn(true);
 
         assertThrows(DroneAlreadyExistsException.class, () -> droneService.save(droneDTO));
     }

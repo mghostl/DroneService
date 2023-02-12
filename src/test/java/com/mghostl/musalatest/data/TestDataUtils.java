@@ -8,13 +8,14 @@ import com.mghostl.musalatest.model.Model;
 import com.mghostl.musalatest.model.State;
 
 import java.util.Base64;
+import java.util.UUID;
 
 public class TestDataUtils {
     public static DroneDTO createDroneDTO() {
         DroneDTO drone = new DroneDTO();
         drone.setModel(Model.HEAVY_WEIGHT);
         drone.setBatteryCapacity(100);
-        drone.setSerialNumber("SerialNumber123");
+        drone.setSerialNumber(UUID.randomUUID().toString());
         drone.setWeightLimit(499);
         return drone;
     }
@@ -24,7 +25,7 @@ public class TestDataUtils {
         drone.setModel(Model.HEAVY_WEIGHT);
         drone.setBatteryCapacity(100);
         drone.setState(State.IDLE);
-        drone.setSerialNumber("SerialNumber123");
+        drone.setSerialNumber(UUID.randomUUID().toString());
         drone.setWeightLimit(499);
         return drone;
     }

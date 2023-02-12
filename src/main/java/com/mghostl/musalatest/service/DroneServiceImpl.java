@@ -9,12 +9,14 @@ import com.mghostl.musalatest.model.State;
 import com.mghostl.musalatest.repository.DroneRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class DroneServiceImpl implements DroneService {
@@ -27,6 +29,7 @@ public class DroneServiceImpl implements DroneService {
     @Transactional
     public DroneDTO save(DroneDTO droneDTO) {
         if (droneRepository.existsById(droneDTO.getSerialNumber())) {
+            log.error("Drone with serial number " + droneDTO.getSerialNumber() + " already exists. Can't register it");
             throw new DroneAlreadyExistsException("Drone with serial number " + droneDTO.getSerialNumber() + " already exists");
         }
 
@@ -45,7 +48,10 @@ public class DroneServiceImpl implements DroneService {
     @Override
     public Drone findBySerialNumber(String serialNumber) {
         return droneRepository.findById(serialNumber)
-                .orElseThrow(() -> new DroneNotExistsException("Drone with serial number " + serialNumber + " doesn't exists"));
+                .orElseThrow(() -> {
+                    log.error("Drone with serialNumber " + serialNumber + " does not exist");
+                    return new DroneNotExistsException("Drone with serial number " + serialNumber + " doesn't exists");
+                });
     }
 
     @Transactional
