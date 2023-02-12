@@ -22,9 +22,10 @@ public class DroneServiceImpl implements DroneService {
     @Override
     @Transactional
     public DroneDTO save(DroneDTO droneDTO) {
-        droneRepository.findById(droneDTO.getSerialNumber()).ifPresent(drone -> {
-            throw new DroneAlreadyExistsException("Drone with serial number " + drone.getSerialNumber() + " already exists");
-        });
+        if (droneRepository.existsById(droneDTO.getSerialNumber())) {
+            throw new DroneAlreadyExistsException("Drone with serial number " + droneDTO.getSerialNumber() + " already exists");
+        }
+
         Drone drone = droneRepository.save(droneMapper.map(droneDTO));
         drone.setState(State.IDLE);
         return droneMapper.map(drone);

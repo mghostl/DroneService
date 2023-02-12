@@ -21,7 +21,6 @@ public class LoadDroneServiceImpl implements LoadDroneService {
 
     private MedicationService medicationService;
     private DroneService droneService;
-
     private MedicationMapper medicationMapper;
 
     @Transactional
@@ -50,6 +49,7 @@ public class LoadDroneServiceImpl implements LoadDroneService {
     }
 
     private <T extends Weightable> double getTotalWeight(Set<T> weightables) {
+        if(weightables.isEmpty()) return 0;
         return weightables
                 .stream()
                 .mapToDouble(Weightable::getWeight)
