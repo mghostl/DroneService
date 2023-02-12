@@ -5,6 +5,7 @@ import com.mghostl.musalatest.dto.MedicationDTO;
 import com.mghostl.musalatest.model.Drone;
 import com.mghostl.musalatest.model.Medication;
 import com.mghostl.musalatest.model.Model;
+import com.mghostl.musalatest.model.State;
 
 import java.util.Base64;
 
@@ -22,6 +23,7 @@ public class TestDataUtils {
         Drone drone = new Drone();
         drone.setModel(Model.HEAVY_WEIGHT);
         drone.setBatteryCapacity(100);
+        drone.setState(State.IDLE);
         drone.setSerialNumber("SerialNumber123");
         drone.setWeightLimit(499);
         return drone;

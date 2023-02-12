@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         webEnvironment = SpringBootTest.WebEnvironment.MOCK,
         classes = DroneApplication.class)
 @AutoConfigureMockMvc
-public abstract class ControllerTest extends IntegrationTest{
+public abstract class ControllerTest extends IntegrationTest {
     @Autowired
     protected MockMvc mvc;
 

@@ -1,6 +1,7 @@
 package com.mghostl.musalatest.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class Drone {
     private String serialNumber;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Model model;
 
     private int weightLimit;
@@ -24,6 +26,7 @@ public class Drone {
     private int batteryCapacity;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private State state;
 
     @OneToMany(mappedBy = "drone", cascade = CascadeType.ALL)

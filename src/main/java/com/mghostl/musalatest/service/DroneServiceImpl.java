@@ -26,15 +26,16 @@ public class DroneServiceImpl implements DroneService {
             throw new DroneAlreadyExistsException("Drone with serial number " + droneDTO.getSerialNumber() + " already exists");
         }
 
-        Drone drone = droneRepository.save(droneMapper.map(droneDTO));
+        Drone drone = droneMapper.map(droneDTO);
         drone.setState(State.IDLE);
+        drone = droneRepository.save(drone);
         return droneMapper.map(drone);
     }
 
     @Transactional
     @Override
-    public void save(Drone drone) {
-        droneRepository.save(drone);
+    public Drone save(Drone drone) {
+        return droneRepository.save(drone);
     }
 
     @Override
