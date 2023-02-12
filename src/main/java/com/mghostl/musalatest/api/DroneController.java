@@ -5,10 +5,7 @@ import com.mghostl.musalatest.service.DroneService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("drones")
@@ -20,6 +17,11 @@ public class DroneController {
     @PostMapping
     ResponseEntity<DroneDTO> registerDrone(@Valid @RequestBody DroneDTO droneDTO) {
         return ResponseEntity.ok(droneService.save(droneDTO));
+    }
+
+    @GetMapping("{serialNumber}/battery")
+    ResponseEntity<Integer> getDroneBattery(@PathVariable String serialNumber) {
+        return ResponseEntity.ok(droneService.findBySerialNumber(serialNumber).getBatteryCapacity());
     }
 
 }
