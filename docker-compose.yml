@@ -1,0 +1,12 @@
+version: 1.0.0
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "drone"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "admin"
+    volumes:
+      - .:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"

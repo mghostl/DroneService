@@ -1,5 +1,10 @@
 ## Drones
 
+
+### Local Launch
+* run docker-compose.yml
+* run DroneApplication
+
 [[_TOC_]]
 
 ---

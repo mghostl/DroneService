@@ -1,0 +1,30 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="create_medications_table" author="mghostl">
+        <createTable tableName="medications">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="picture" type="bytea">
+                <constraints nullable="false"/>
+            </column>
+            <column name="drone_id" type="varchar">
+                <constraints foreignKeyName="fk_drone" referencedColumnNames="serial_number" referencedTableName="drones"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="medications_seq" incrementBy="1" startValue="1"/>
+
+    </changeSet>
+</databaseChangeLog>
