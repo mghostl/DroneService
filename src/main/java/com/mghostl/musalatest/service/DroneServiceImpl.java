@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -53,5 +54,10 @@ public class DroneServiceImpl implements DroneService {
         return droneRepository.getAvailableDronesForLoading()
                 .stream().map(droneMapper::map)
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public List<Drone> getAllDrones() {
+        return droneRepository.findAll();
     }
 }
