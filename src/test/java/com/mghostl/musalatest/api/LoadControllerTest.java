@@ -1,8 +1,10 @@
 package com.mghostl.musalatest.api;
 
 import com.mghostl.musalatest.base.ControllerTest;
+import com.mghostl.musalatest.dto.DroneDTO;
 import com.mghostl.musalatest.dto.LoadMedicationsRequest;
 import com.mghostl.musalatest.dto.MedicationDTO;
+import com.mghostl.musalatest.mapper.DroneMapper;
 import com.mghostl.musalatest.mapper.MedicationMapper;
 import com.mghostl.musalatest.model.Drone;
 import com.mghostl.musalatest.repository.DroneRepository;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 import static com.mghostl.musalatest.data.TestDataUtils.createDrone;
 import static com.mghostl.musalatest.data.TestDataUtils.createMedicationDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 public class LoadControllerTest extends ControllerTest {
 
@@ -34,6 +37,9 @@ public class LoadControllerTest extends ControllerTest {
     @Autowired
     MedicationMapper medicationMapper;
 
+    @Autowired
+    DroneMapper droneMapper;
+
     @Test
     public void shouldLoadDrone() throws Exception {
         Drone drone = createDrone();
@@ -46,7 +52,17 @@ public class LoadControllerTest extends ControllerTest {
 
         checkContent(expectedMedications, result);
         assertEquals(medicationService.findAllByDroneSerialNumber(drone.getSerialNumber()), expectedMedications);
+    }
 
+    @Test
+    public void shouldGetAvailableDronesForLoading() throws Exception {
+        Drone drone = createDrone();
+        droneRepository.save(drone);
+        Set<DroneDTO> expectedDrones = Collections.singleton(droneMapper.map(drone));
+
+        ResultActions result = mvc.perform(get("/load/drones"));
+
+        checkContent(expectedDrones, result);
     }
 
 }

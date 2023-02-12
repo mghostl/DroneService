@@ -1,5 +1,6 @@
 package com.mghostl.musalatest.service;
 
+import com.mghostl.musalatest.dto.DroneDTO;
 import com.mghostl.musalatest.dto.MedicationDTO;
 import com.mghostl.musalatest.exceptions.DroneIsNotReadyForLoadingException;
 import com.mghostl.musalatest.exceptions.OverloadDroneException;
@@ -46,6 +47,11 @@ public class LoadDroneServiceImpl implements LoadDroneService {
                 .map(medicationService::save)
                 .map(medication -> medicationMapper.map(medication))
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<DroneDTO> getAvailableDronesForLoading() {
+        return droneService.getAvailableDronesForLoading();
     }
 
     private <T extends Weightable> double getTotalWeight(Set<T> weightables) {

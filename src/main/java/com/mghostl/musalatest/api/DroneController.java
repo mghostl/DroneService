@@ -21,4 +21,5 @@ public class DroneController {
     ResponseEntity<DroneDTO> registerDrone(@Valid @RequestBody DroneDTO droneDTO) {
         return ResponseEntity.ok(droneService.save(droneDTO));
     }
+
 }

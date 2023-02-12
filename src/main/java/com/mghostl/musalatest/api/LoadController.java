@@ -1,5 +1,6 @@
 package com.mghostl.musalatest.api;
 
+import com.mghostl.musalatest.dto.DroneDTO;
 import com.mghostl.musalatest.dto.LoadMedicationsRequest;
 import com.mghostl.musalatest.dto.MedicationDTO;
 import com.mghostl.musalatest.service.LoadDroneService;
@@ -20,4 +21,11 @@ public class LoadController {
     ResponseEntity<Set<MedicationDTO>> loadDrone(@PathVariable String serialNumber, @RequestBody LoadMedicationsRequest loadMedicationsRequest) {
         return ResponseEntity.ok(loadDroneService.loadDrone(serialNumber, loadMedicationsRequest.getMedications()));
     }
+
+    // due to 10 drones fleet pagination isn't needed.
+    @GetMapping("drones")
+    ResponseEntity<Set<DroneDTO>> getAvailableDronesForLoading() {
+       return ResponseEntity.ok(loadDroneService.getAvailableDronesForLoading());
+    }
+
 }

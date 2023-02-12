@@ -11,6 +11,9 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class DroneServiceImpl implements DroneService {
@@ -42,5 +45,13 @@ public class DroneServiceImpl implements DroneService {
     public Drone findBySerialNumber(String serialNumber) {
         return droneRepository.findById(serialNumber)
                 .orElseThrow(() -> new DroneNotExistsException("Drone with serial number " + serialNumber + " doesn't exists"));
+    }
+
+    @Transactional
+    @Override
+    public Set<DroneDTO> getAvailableDronesForLoading() {
+        return droneRepository.getAvailableDronesForLoading()
+                .stream().map(droneMapper::map)
+                .collect(Collectors.toSet());
     }
 }
