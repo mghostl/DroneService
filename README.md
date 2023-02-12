@@ -3,7 +3,18 @@
 
 ### Local Launch
 * run docker-compose.yml
+```shell
+docker-compose up
+```
 * run DroneApplication
+```shell
+./gradlew bootRun
+```
+
+### Tests
+```shell
+./gradlew test
+```
 
 [[_TOC_]]
 
